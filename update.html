@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+
+</html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Обновление заявки</title>
+</head>
+
+<body>
+    <a href="create.html">Создание заявки</a>
+    <a href="order.html">Список заявок</a>
+    <a href="update.html">Обновление заявки</a>
+    <a href="stat.html">Статистика</a><br>
+
+    <iframe name="frame" style="display: none;"></iframe>
+    <form target="frame" action="http://127.0.0.1:8000/update" method="post">
+        <input required placeholder="Номер" type="number" name="number" /><br/>
+        <input placeholder="Описание" type="text" name="description" /><br/>
+        <input placeholder="Мастер" type="text" name="master" /><br/>
+        <input placeholder="Комментарий" type="text" name="comment" /><br/>
+        <input placeholder="Этап" type="text" name="etap" /><br/>
+        <label for="status">Статус</label><br/>
+        <select name="status">
+            <option></option>
+            <option>Готов к выдаче</option>
+            <option>В прочессе ремонта</option>
+            <option>Ожидание запчастей</option>
+        </select><br/>
+        <input type="submit" value="Обновление" />
+    </form>
+</body>
+
+</html>

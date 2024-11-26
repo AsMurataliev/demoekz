@@ -42,6 +42,7 @@ class Order(BaseModel):
 
 
 class UpdateOrderDTO(BaseModel):
+  number: int
   description: Optional[str] = ""
   master: Optional[str] = ""
   comment: Optional[str] = str
