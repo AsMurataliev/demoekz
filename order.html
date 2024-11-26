@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>список Заявок</title>
+</head>
+
+<body>
+    <a href="create.html">Создание заявки</a>
+    <a href="order.html">Список заявок</a>
+    <a href="update.html">Обновление заявки</a>
+    <a href="stat.html">Статистика</a><br>
+    <div>
+        <input id="search" placeholder="Номер" />
+        <button onclick="GetFilter()">Найти</button>
+    </div>
+    <table>
+        <thead>
+            <tr>
+                <th>Номер заявки</th>
+                <th>Дата добавления</th>
+                <th>Вид оргтехники</th>
+                <th>Модель</th>
+                <th>Описание проблемы</th>
+                <th>ФИО клиента</th>
+                <th>Номер телефона</th>
+                <th>Мастер</th>
+                <th>Комментарии</th>
+            </tr>
+        </thead>
+        <tbody>
+
+        </tbody>
+    </table>
+    <script>
+        let table = document.querySelector("tbody");
+        GetOrders();
+
+        async function GetOrders(param = null) {
+
+            let response = param ?
+                await fetch(`http://127.0.0.1:8000/orders?param=${param}`).then(data => data.json()) :
+                await fetch("http://127.0.0.1:8000/orders").then(data => data.json())
+            if (response.message)
+                alert(response.message);
+            response.repo.forEach(x => {
+                let tr = document.createElement("tr");
+
+                tr.innerHTML = `
+                  <td>${x.number}</td>
+                  <td>${x.startDate}</td>
+                  <td>${x.type_device}</td>
+                  <td>${x.model}</td>
+                  <td>${x.description}</td>
+                  <td>${x.fio}</td>
+                  <td>${x.num_tel}</td>
+                  <td>${x.status}</td>
+                  <td>${x.master}</td> 
+                  <td>${x.comments}</td>`;
+
+                table.append(tr);
+            });
+
+        }
+
+        function GetFilter() {
+            table.innerHTML = ""
+            let param = document.getElementById("search").value;
+            GetOrders(param)
+        }
+    </script>
+
+</body>
+
+</html>
