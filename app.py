@@ -5,7 +5,7 @@ from typing import Annotated, Optional
 import datetime
 
 def complete_count():
-    return len([o for o in repo if o.status == "завершена"])
+    return len([x for x in repo if x.status == "завершена"])
 
 def get_problem_type_stat():
     dict = {}
@@ -18,8 +18,8 @@ def get_problem_type_stat():
 
 def get_average_time_to_complete():
     times = [
-        datetime.datetime.fromisoformat(o.endDate.isoformat()) -
-        datetime.datetime.fromisoformat(o.startDate.isoformat()).days
+        datetime.datetime.fromisoformat(x.endDate.isoformat()) -
+        datetime.datetime.fromisoformat(x.startDate.isoformat()).days
                  for x in repo 
                  if x.status == "завершена"]
     if complete_count() != 0:
@@ -99,9 +99,9 @@ def update_order(dto: Annotated[UpdateOrderDTO , Form()]):
         if x.number == dto.number:
             if dto.status != x.status and dto.status != "":
                 x.status = dto.status
-                message += f"Статус заявки №${o.number} изменен\n"
+                message += f"Статус заявки №${x.number} изменен\n"
                 if(x.status == "завершена"):
-                    message += f"Заявки №{o.number} Завершено\n"
+                    message += f"Заявки №{x.number} Завершено\n"
                     x.endDate = datetime.datetime.now()
             if dto.description != "":
                 x.description = dto.description
