@@ -1,0 +1,5 @@
+1. установка pip - py get-pip.py
+2.Установка фастапи - pip install fastapi
+Также для работы с FastAPI нам потребуется ASGI веб-сервер - pip install "uvicorn[standard]"
+Теперь запустим приложение. Для этого перейдем в терминале к папке, где располагает файл app.py и затем выполним команду
+uvicorn app:app --reload
